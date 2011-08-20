@@ -26,7 +26,7 @@ DATABASES = {
     }
 }
 
-SESSION_COOKIE_NAME = 'awpug.org'
+SESSION_COOKIE_NAME = 'austinpython.org'
 SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 SESSION_COOKIE_AGE = 60 * 60 * 24 * 7 * 2
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
@@ -130,7 +130,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'cms.context_processors.media',
 )
 
-ROOT_URLCONF = 'awpug.urls'
+ROOT_URLCONF = 'austinpython.urls'
 
 TEMPLATE_DIRS = (
     map_path('templates'),
@@ -162,7 +162,7 @@ INSTALLED_APPS = (
 #    'sorl.thumbnail',
     'south',
     'tinymce',
-    'lib.widget_tweaks',
+    'austinpython.lib.widget_tweaks',
 )
 
 CMS_TEMPLATES = (

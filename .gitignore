@@ -6,5 +6,8 @@ local_settings.py
 *.project
 *.pydevproject
 *.vagrant
+pip-log.txt
 build/
 manifests/build
+manifests/src
+manifests/pip-log.txt

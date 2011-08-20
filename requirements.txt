@@ -1,6 +1,10 @@
 BeautifulSoup
-Django
+django
 django-cms
 django-compressor
 django-robots
+django-appmedia
+django-tinymce
+PIL
+-e git+http://github.com/wardi/django-filebrowser-no-grappelli.git#egg=django-filebrowser
 south
