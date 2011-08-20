@@ -1,0 +1,6 @@
+BeautifulSoup
+Django
+django-cms
+django-compressor
+django-robots
+south
