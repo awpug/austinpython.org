@@ -12,15 +12,23 @@ class Profile(models.Model):
 
     type = models.CharField(max_length=40, default="halfway")
     name = models.CharField(max_length=200) # user's full name
-    username = models.CharField(max_length=200)
     email = models.EmailField(max_length=200)
-    url = models.CharField(max_length=512) # okay, so some may be longer...
-    default = models.BooleanField(default=False)
+    url = models.TextField(blank=True)
+    is_default = models.BooleanField(default=False)
     user = models.ForeignKey(User)
     added_date = models.DateTimeField(default=datetime.now, editable=False)
 
     class Meta:
         ordering = ["-default", "-added_date"]
+        abstract = True
+
+    def __unicode__(self):
+        return self.name
+
+    @classmethod
+    def populate_from_request(self, request):
+        raise NotImplementedError('Classes that subclass Profile need to implement this method')
+
 
 class Profiles(object):
     """ The singleton for all profile models. """
@@ -46,10 +54,11 @@ class Profiles(object):
 
     def get_user_profile(self, user, profile_class):
         """ Retrieve a profile instance for a user (if it exists) """
-        results = profile_class.objects.filter(user=user)
-        if results:
-            return results[0]
-        return None
+        try:
+            result = profile_class.objects.get(user=user, is_default=True)
+        except profile_class.DoesNotExist:
+            result = None
+        return result
 
     def add_profile(self, key, name, profile_class):
         """ Add a profile to the profiles dictionary """
