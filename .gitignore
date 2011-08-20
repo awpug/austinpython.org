@@ -1,1 +1,7 @@
 local_settings.py
+*.pyc
+*.swp
+*.swo
+*.project
+*.pydevproject
+manifests/build
