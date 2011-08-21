@@ -1,9 +1,9 @@
-from django.db import models
+""" The "generic" profile for a new Austin Python member. """
 
 from profiles.models import Profile, profile
 
-@profile('AustinPython')
-class AustinPythonProfile(Profile):
+@profile
+class AustinPython(Profile):
 
     @classmethod
     def populate_from_request(cls, request):
@@ -12,6 +12,5 @@ class AustinPythonProfile(Profile):
         the request that comes back from the oAuth provider
         """
         name = request.POST.get('name')
-        austin_python_profile, created = cls.get_or_create(name=name,
-                                                           defaults={'name' : name})
+        austin_python_profile = cls(name=name)
         return austin_python_profile

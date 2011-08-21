@@ -1,7 +1,35 @@
 from django.db import models
+from django.core import exceptions
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from datetime import datetime
+import json
+
+class DictField(models.TextField):
+    """ Serializes JSON on save and load. """
+
+    __metaclass__ = models.SubfieldBase
+
+    def to_python(self, value):
+        """ Returns the dictionary saved. """
+        if value is None:
+            return None
+        if type(value) is dict:
+            # still a dictionary, hasn't been encoded
+            return value
+        try:
+            return json.loads(value)
+        except ValueError:
+            raise exceptions.ValidationError("Invalid JSON in JSONField.")
+
+    def get_db_prep_save(self, value, connection):
+        """ Translate to JSON """
+        if value is not None:
+            assert(type(value) is dict)
+            value = json.dumps(value)
+        return super(DictField, self).get_db_prep_save(value=value,
+                connection=connection)
+
 
 class Profile(models.Model):
     """
@@ -9,25 +37,35 @@ class Profile(models.Model):
     to create internal / external profile information,
     such as Twitter or Facebook data.
     """
-
-    type = models.CharField(max_length=40, default="halfway")
+    type = models.CharField(max_length=128)
     name = models.CharField(max_length=200) # user's full name
     email = models.EmailField(max_length=200)
     url = models.TextField(blank=True)
     is_default = models.BooleanField(default=False)
     user = models.ForeignKey(User)
     added_date = models.DateTimeField(default=datetime.now, editable=False)
+    data = DictField() # for platform-specific data.
 
     class Meta:
-        ordering = ["-default", "-added_date"]
-        abstract = True
+        ordering = ["-is_default", "-added_date"]
+
+    def __init__(self, *args, **kwargs):
+        """ Sets type automatically """
+        kwargs.setdefault("type", slugify(self.__class__.__name__))
+        kwargs.setdefault("data", self.get_default_data())
+        super(Profile, self).__init__(*args, **kwargs)
 
     def __unicode__(self):
-        return self.name
+        return self.type+"|"+self.name
+
+    def get_default_data(self):
+        """ Returns a default dictionary of data. Overwrite in subclasses. """
+        return {}
 
     @classmethod
     def populate_from_request(self, request):
-        raise NotImplementedError('Classes that subclass Profile need to implement this method')
+        raise NotImplementedError("Classes that subclass Profile need "
+            "to implement this method")
 
 
 class Profiles(object):
@@ -66,61 +104,58 @@ class Profiles(object):
             raise KeyError("Profile short name %s already exists" % key)
         self._profiles[key] = (name, profile_class)
 
-def profile(name=None, short_name=None):
+def profile(cls):
     """
     This decorator identifies a model as a Profile class,
     suitable for searching, etc.
 
     Example usage:
 
-    @profile("GitHub") # short name will be 'github'
+    @profile # short name will be 'github'
     class GitHub(Profile):
         repos = models.ForeignKey(GitRepository)
         #... extra stuff ...
 
     """
-    def wrapper(cls):
-        if not issubclass(cls, Profile):
-            raise ValueError("A profile must be subclassed from Profile.")
-        # hate using 'global'...
-        cls_name = name
-        cls_short_name = short_name
-        if not cls_name:
-            cls_name = cls.__name__
-        if not cls_short_name:
-            cls_short_name = slugify(cls_name)
-        cls.type.default = short_name
-        if not hasattr(cls, "Meta"):
-            class Meta:
-                proxy = True
-            cls.Meta = Meta
-        Profiles.instance().add_profile(cls_short_name, cls_name, cls)
-        return cls
-    if issubclass(name, Profile):
-        # decorator with no arguments / ()
-        klass = name
-        name = None
-        return wrapper(klass)
-    return wrapper
+    if not issubclass(cls, Profile):
+        raise ValueError("A profile must be subclassed from Profile.")
+    cls_short_name = slugify(cls.__name__)
+
+    if not hasattr(cls, "Meta"):
+        class Meta:
+            proxy = True
+        cls.Meta = Meta
+    Profiles.instance().add_profile(cls_short_name, cls.__name__, cls)
+    return cls
 
 
 def get_user_profiles(self, **kwargs):
     """ Retrieve a user's external profile """
-    kwargs.setdefault(user=self)
+    kwargs.setdefault("user", self)
     return Profile.objects.filter(**kwargs)
 
+def get_user_profile(user, **kwargs):
+    """ Returns the first matching profile for the user """
+    kwargs["user"] = user
+    return Profile.objects.get(**kwargs)
+
 def user_profile_shortcut(self):
-    """ The profile 'attribute' on a User model -- returns first profile. """
-    results = self.get_user_profiles()
-    if results:
-        return results[0]
-    return None
+    """ The profile 'attribute' on a User model """
+    return get_user_profile(self)
 
-# If the User already has a .profile attribute, we don't
-# want to monkey patch it.
+def create_user_from_profile(self, profile):
+    """ Sets up a basic user from the provided profile. """
+    kwargs = {"email": profile.email, "username": profile.email}
+    name_parts = profile.name.split(" ")
+    if name_parts:
+        kwargs["first_name"] = name_parts[0]
+    if len(name_parts) > 1:
+        kwargs["last_name"] = " ".join(name_parts[1:])
+    user = User(**kwargs)
+    return user
 
-if hasattr(User, "profile") or hasattr(User, "get_user_profiles"):
-    raise Exception("Cannot use halfway profiles -- User model already has "
-                    "profile attributes.")
+
+# monkey patching the user profiles
 User.get_user_profiles = get_user_profiles
 User.profile = property(user_profile_shortcut)
+User.create_from_profile = classmethod(create_user_from_profile)
