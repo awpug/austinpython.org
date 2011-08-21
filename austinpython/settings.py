@@ -155,3 +155,16 @@ LOGGING = {
         },
     }
 }
+
+# Registration settings
+TWITTER_CONSUMER_KEY = "SET_IN_LOCAL_SETTINGS"
+TWITTER_CONSUMER_SECRET = "SET_IN_LOCAL_SETTINGS"
+TWITTER_CALLBACK_URL = "http://localhost:8080/register/twitter/callback"
+TWITTER_TEST_REQUEST_TOKEN = False
+
+try:
+    from local_settings import *
+except ImportError:
+    import logging
+    logging.warning("No local settings found -- using defaults!")
+

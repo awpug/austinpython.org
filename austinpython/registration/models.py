@@ -14,3 +14,13 @@ class AustinPython(Profile):
         name = request.POST.get('name')
         austin_python_profile = cls(name=name)
         return austin_python_profile
+
+@profile
+class Twitter(Profile):
+
+    @classmethod
+    def populate_from_request(cls, request):
+        """
+        Grab results from a successful OAuth callback.
+        """
+        pass

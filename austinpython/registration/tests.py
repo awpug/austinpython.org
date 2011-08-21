@@ -1,9 +1,15 @@
 from django.test import TestCase, Client
+from django.utils.unittest import skipUnless
 from django.contrib.auth.models import User
 from django.forms import ValidationError
 from austinpython.tests import Mock
 from austinpython.registration.forms import RegistrationForm
 from austinpython.registration.models import AustinPython
+from austinpython.registration import twitter
+from austinpython import settings
+import urlparse
+import httplib2
+import oauth2
 
 class TestRegistrationForm(TestCase):
 
@@ -78,3 +84,63 @@ class TestRegistrationController(TestCase):
         self.assertEqual(User.objects.count(), 0)
         self.assertEqual(AustinPython.objects.count(), 0)
 
+
+
+""" TWITTER """
+
+class TestTwitterRegistrationRequest(TestCase):
+    
+    def setUp(self):
+        """ Overwrite settings for the tests. """
+        self.original_key = settings.TWITTER_CONSUMER_KEY
+        self.original_secret = settings.TWITTER_CONSUMER_SECRET
+        self.original_callback = settings.TWITTER_CALLBACK_URL
+        settings.TWITTER_CONSUMER_KEY = "foobar"
+        settings.TWITTER_CONSUMER_SECRET = "foobarfoobar"
+        settings.TWITTER_CALLBACK_URL = "http://localhost/foobar"
+
+    def test_get_twitter_redirect_url(self):
+        """ Test that we get a properly signed redirect URL. """
+        # overwriting settings
+        request_token = oauth2.Token(key="foobar", secret="foobarfoobar")
+        request_token.set_callback(settings.TWITTER_CALLBACK_URL)
+        redirect_url = twitter.get_twitter_redirect_url(request_token)
+        
+        parts = urlparse.urlparse(redirect_url)
+        args = urlparse.parse_qs(parts.query)
+
+        test_args = {"oauth_token": [request_token.key,],
+                     "oauth_callback": ["http://localhost/foobar",]}
+        test_path = "/oauth/authorize"
+        
+        self.assertEqual(args, test_args)
+        self.assertEqual(parts.path, test_path)
+
+    def test_get_twitter_consumer(self):
+        """ Test the returned URL for a request token """
+        consumer = twitter.get_twitter_consumer()
+        self.assertEqual(consumer.key, "foobar")
+        self.assertEqual(consumer.secret, "foobarfoobar")
+
+    def tearDown(self):
+        """ Restore original settings. """
+        settings.TWITTER_CONSUMER_KEY = self.original_key
+        settings.TWITTER_CONSUMER_SECRET = self.original_secret
+        settings.TWITTER_CALLBACK_URL = self.original_callback
+
+class TestTwitterActualCalls(TestCase):
+    """ If the settings allow it, test calls to the Twitter API. """
+
+    @skipUnless(settings.TWITTER_TEST_REQUEST_TOKEN,
+        "Twitter request token test not requested.")
+    def test_get_request_token(self):
+        """ Test that we get a valid request token. """
+        token = twitter.get_twitter_request_token()
+        self.assertEqual(token.get_callback_url(),
+                settings.TWITTER_CALLBACK_URL)
+
+        redirect_url = twitter.get_twitter_redirect_url()
+        args = urlparse.parse_qs(urlparse.urlparse(redirect_url).query)
+        self.assertEqual(token.callback, args["oauth_callback"][0])
+        response, content = httplib2.Http().request(redirect_url)
+        self.assertEqual(response.status, 200)
