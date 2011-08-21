@@ -8,6 +8,10 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'austinpython.views.home', name='home'),
     # url(r'^austinpython/', include('austinpython.foo.urls')),
+    url(r'^register/austinpython$',
+        'austinpython.registration.views.register_austinpython_get'),
+    url(r'^register/austinpython/submit',
+        'austinpython.registration.views.register_austinpython_post')
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

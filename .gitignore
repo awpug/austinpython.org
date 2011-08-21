@@ -6,6 +6,7 @@ local_settings.py
 *.project
 *.pydevproject
 *.vagrant
+austinpython.db
 pip-log.txt
 build/
 manifests/build

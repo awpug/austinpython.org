@@ -1,6 +1,6 @@
 """ The "generic" profile for a new Austin Python member. """
 
-from profiles.models import Profile, profile
+from austinpython.profiles.models import Profile, profile
 
 @profile
 class AustinPython(Profile):

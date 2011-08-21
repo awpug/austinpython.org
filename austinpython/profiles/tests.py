@@ -1,7 +1,7 @@
 from django.test import TestCase
-from profiles.models import Profiles, Profile, profile
 from django.contrib.auth.models import User
 import datetime
+from austinpython.profiles.models import Profiles, Profile, profile
 
 @profile
 class Testing(Profile):

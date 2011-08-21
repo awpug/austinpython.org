@@ -1,4 +1,4 @@
-from django.test import TestCase
+from django.test import TestCase, Client
 from django.contrib.auth.models import User
 from django.forms import ValidationError
 from austinpython.tests import Mock
@@ -45,3 +45,36 @@ class TestAustinPythonProfile(TestCase):
         request = Mock(POST={"name": "testing"})
         profile = AustinPython.populate_from_request(request)
         self.assertEqual(profile.name, "testing")
+
+class TestRegistrationController(TestCase):
+
+    def test_get_new_user_profile(self):
+        """ Test that a GET for the registration works. """
+        client = Client()
+        response = client.get("/register/austinpython")
+        self.assertEqual(response.status_code, 200)
+
+    def test_post_new_user_profile(self):
+        """ Test a POST to the registration controller. """
+        client = Client()
+        response = client.post("/register/austinpython/submit", 
+            {"name": "Test Name", "email": "test@foo.com", 
+                "password": "testing",
+                "confirm_password": "testing"})
+        self.assertEqual(response.status_code, 302)
+        user = User.objects.get()
+        self.assertEqual(user.first_name, "Test")
+        self.assertEqual(user.last_name, "Name")
+        self.assertEqual(user.email, "test@foo.com")
+        self.assertTrue(user.check_password("testing"))
+
+    def test_post_failed_new_user_profile(self):
+        """ Test that an invalid POST fails. """
+        client = Client()
+        data = {"name": "Test Name", "email": "test@foo.com",
+                "password": "testing", "confirm_password": "fail"}
+        self.assertRaises(ValueError, client.post,
+            "/register/austinpython/submit", data)
+        self.assertEqual(User.objects.count(), 0)
+        self.assertEqual(AustinPython.objects.count(), 0)
+
