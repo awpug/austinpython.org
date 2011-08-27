@@ -63,8 +63,8 @@ class TestRegistrationController(TestCase):
     def test_post_new_user_profile(self):
         """ Test a POST to the registration controller. """
         client = Client()
-        response = client.post("/register/austinpython/submit", 
-            {"name": "Test Name", "email": "test@foo.com", 
+        response = client.post("/register/austinpython/submit",
+            {"name": "Test Name", "email": "test@foo.com",
                 "password": "testing",
                 "confirm_password": "testing"})
         self.assertEqual(response.status_code, 302)
@@ -89,7 +89,7 @@ class TestRegistrationController(TestCase):
 """ TWITTER """
 
 class TestTwitterRegistrationRequest(TestCase):
-    
+
     def setUp(self):
         """ Overwrite settings for the tests. """
         self.original_key = settings.TWITTER_CONSUMER_KEY
@@ -105,14 +105,14 @@ class TestTwitterRegistrationRequest(TestCase):
         request_token = oauth2.Token(key="foobar", secret="foobarfoobar")
         request_token.set_callback(settings.TWITTER_CALLBACK_URL)
         redirect_url = twitter.get_twitter_redirect_url(request_token)
-        
+
         parts = urlparse.urlparse(redirect_url)
         args = urlparse.parse_qs(parts.query)
 
         test_args = {"oauth_token": [request_token.key,],
                      "oauth_callback": ["http://localhost/foobar",]}
         test_path = "/oauth/authorize"
-        
+
         self.assertEqual(args, test_args)
         self.assertEqual(parts.path, test_path)
 
