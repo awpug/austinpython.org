@@ -1,4 +1,5 @@
 from django.test import TestCase, Client
+from django.db import IntegrityError
 from django.utils.unittest import skipUnless
 from django.contrib.auth.models import User
 from django.forms import ValidationError
@@ -23,6 +24,9 @@ class TestRegistrationForm(TestCase):
         profile = form.save()
         self.assertEqual(profile.email, profile.user.username)
         self.assertTrue(profile.user.check_password(data["password"]))
+        form = RegistrationForm(data)
+        self.assertTrue(form.is_valid())
+        self.assertRaises(IntegrityError, form.save)
 
     def test_invalid_registration_form(self):
         """ Test that invalid registration data raises Validation errors. """
@@ -46,11 +50,16 @@ class TestAustinPythonProfile(TestCase):
         self.assertEqual(user.profile.id, profile.id)
         self.assertEqual(profile.data, {})
 
+        profile = AustinPython(user=user, name="duplicate",
+                               email="test@foo.com")
+        self.assertRaises(IntegrityError, profile.save)
+
     def test_new_austin_python_profile_from_request(self):
         """ Test a new profile from a mock request object. """
         request = Mock(POST={"name": "testing"})
         profile = AustinPython.populate_from_request(request)
         self.assertEqual(profile.name, "testing")
+
 
 class TestRegistrationController(TestCase):
 
