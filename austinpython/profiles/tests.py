@@ -38,6 +38,9 @@ class TestProfiles(TestCase):
         self.assertEqual(new_profile.user, user)
         self.assertEqual(user.profile.id, new_profile.id)
         self.assertEqual(user.profile.data, {"foo": "bar"})
+        self.assertEqual(user.profile.get_image(size=40),
+            "//www.gravatar.com/avatar/"
+            "3cb7232fcc48743000cb86d0d5022bd9?s=40")
 
     def test_new_user(self):
         """ Test creating a new user from a profile. """

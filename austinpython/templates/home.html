@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}| Home{% endblock %}
+{% block banner %}
+<div id="banner">
+    <div id="signup-form">
+        <h2>Sign Up</h2>
+        <form>
+            <label for="name">Name</label>
+            <input name="name" type="text" id="signup-name"/>
+            <label for="email">Email</label>
+            <input name="email" type="text" id="signup-email"/>
+            <input type="submit" name="submit" id="signup-submit" value="Sign Me Up"/>
+        </form>
+    </div>
+
+    <div class="banner-column" id="news-column">
+        <h2>News &amp; Events</h2>
+        <div id="news-slides" class="box">
+            <div class="slides_container box-container">
+                <div>
+                    <div class="slide-content">
+                        <h3>July AWPUG Meetup</h3>
+                        <p>
+                            The July AWPUG Meetup will be held at the
+                            Texas Tribune., as always. Remember to 
+                            always bring your towel, and DON'T PANIC. 
+                        </p>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="slide-content">
+                        <h3>Scaling Python Slides</h3>
+                        <p>
+                            Brett Hoerner has kindly posted his
+                            slides from his Scaling Python talk
+                            in June. <a href="">Click here</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="banner-column" id="opportunities-column">
+        <h2>Opportunities &amp; Jobs</h2>
+        <div class="box">
+            <ul id="opportunities" class="box-container">
+                {% for opp in opportunities %}
+                <li>
+                    <img class="avatar"
+                    src="{{ opp.user.profile.get_image }}"
+                    width="40" height="40"/>
+                    <p class="name">{{ opp.user.profile.name }}</p>
+                    <p class="post">{{ opp.text }}</p>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+</div>
+{% endblock %}{# end banner #}
+
+{% block content %}
+<div id="content">
+
+    <div class="column">
+        <h2>Recent Tweets</h2>
+    </div>
+
+    <div class="column right">
+        <h2>Recent Gists</h2>
+    </div>
+
+
+</div>
+{% endblock %}{# content #}
+
+{% block extra_scripts %}
+<script type="text/javsacript" src="/static/js/slides.min.js"></script>
+<script type="text/javascript" src="/static/js/header.js"></script>
+<script type="text/javascript">
+    Header.init();
+    $(function() {
+        $("#news-slides").slides();
+    });
+</script>
+{% endblock %}{# end extra scripts #}

@@ -1,0 +1,258 @@
+/* FONTS */
+@import url("http://fonts.googleapis.com/css?family=PT+Sans|Podkova");
+
+/* RESET */
+
+html, body {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    background: #CCC url("/static/images/body_bg_top.png") left -80px repeat-x;
+    font-family: "PT Sans", "Arial", "sans-serif";
+}
+
+p, h1, h2, h3, h4, h5, h6, ul, li, ol {
+    margin: 0;
+    padding: 0;
+    font-family: "PT Sans", "Arial", "sans-serif";
+}
+
+p {
+    color: #444;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+
+#header {
+    background-color: rgb(34, 46, 29);
+    height: 95px;
+    padding-top: 22px;
+}
+
+    #logo {
+        margin: 0 auto -200px;
+        width: 0;
+        height: 0;
+        padding: 200px 0 0 278px;
+        overflow: hidden;
+        background-image: url("/static/images/ap_logo.png");
+        background-position: top left;
+        background-repeat: no-repeat;
+    }
+
+    #import-widget {
+        margin: 0 auto;
+        text-align: left;
+        width: 500px;
+        line-height: 73px;
+        font-size: 34px;
+        color: rgba(254, 254, 254, 0.3);
+    }
+
+        #import-widget .import {
+            position: relative;
+        }
+
+        #import-widget #module {
+            position: relative;
+            left: 290px;
+        }
+
+#banner, #content {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+#banner {
+    height: 400px;
+    overflow: hidden;
+}
+
+#content {
+    min-height: 500px;
+}
+
+
+#signup-form {
+    height: 260px;
+    position: relative;
+    margin: 130px auto -400px;
+    width: 260px;
+    background: url("/static/images/signup_bg.png") center top no-repeat;
+}
+
+    #signup-form h2 {
+        text-align: center;
+        color: #FFF;
+        font-family: "Podkova", sans-serif;
+        margin: 0 0 28px;
+        padding-top: 8px;
+        text-shadow: 0 2px 0 rgba(0, 0, 0, 0.5);
+    }
+
+        #signup-form form {
+            width: 140px;
+            margin: 0 auto;
+        }
+
+            #signup-form label {
+                font-family: "Podkova", serif;
+                font-size: 12px;
+                color: #FFF;
+                text-transform: uppercase;
+                display: block;
+            }
+
+            #signup-form input {
+                display: block;
+                border: 0;
+                font-size: 16px;
+                line-height: 20px;
+                font-family: "PT Sans", sans-serif;
+                color: #555;
+                padding: 3px 6px;
+                width: 128px;
+                margin-bottom: 10px;
+                border-radius: 4px;
+            }
+
+            #signup-form input#signup-submit {
+                background: #800;
+                color: #FFF;
+                text-align: center;
+                display: block;
+                margin-top: 24px;
+                font-size: 16px;
+                padding: 7px 10px;
+                border-radius: 5px;
+                width: 100%;
+            }
+
+
+.banner-column {
+    padding-top: 30px;
+    float: left;
+    width: 430px;
+}
+
+.banner-column#opportunities-column {
+    float: right;
+}
+
+    .banner-column h2 {
+        font-family: "Podkova", serif;
+        text-align: center;
+        font-weight: normal;
+        font-size: 24px;
+        color: #577353;
+    }
+
+#banner .box {
+    background: rgba(0, 0, 0, 0.1);
+    padding: 14px;
+    border-radius: 7px;
+    margin-top: 14px;
+}
+
+#banner .box .box-container {
+    background: #FFF;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    width: 372px;
+    height: 204px;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+    overflow: auto;
+}
+
+#banner .box#news-slides {
+    background: url("/static/images/tv_bg.png") top left no-repeat;
+    height: 260px;
+    width: 410px;
+}
+
+#banner .box#news-slides .slides_container {
+    overflow: hidden;
+    background: none;
+    width: 388px;
+    height: 188px;
+    margin: 10px 0 0 10px;
+}
+
+    #banner .box#news-slides .slides_container div {
+        width: 388px;
+        height: 188px;
+        border-bottom: 1px solid #000;
+        overflow: hidden;
+    }
+
+.slide-content {
+    padding: 10px;
+}
+
+    .slide-content h3 {
+        font-size: 24px;
+        margin-bottom: 8px;
+    }
+
+.box h3 {
+    font-family: "Podkova", sans-serif;
+    font-weight: normal;
+    color: #800000;
+}
+
+#opportunities-column .box-container {
+    list-style: none;
+    padding: 14px;
+    margin: 0;
+}
+
+    #opportunities-column li {
+        border-top: 1px solid rgba(0, 0, 0, 0.2);
+        padding-bottom: 10px;
+        padding-top: 10px;
+    }
+
+        #opportunities-column li:first-child {
+            padding-top: 0;
+            border-top: none;
+        }
+
+        #opportunities-column img.avatar {
+            float: left;
+            margin: 3px -40px 0 0;
+            width: 40px;
+            display: block;
+            padding: 1px;
+            border: 1px solid rgba(0, 0, 0, 1);
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+        }
+
+        #opportunities-column p {
+            margin-left: 56px;
+        }
+
+        #opportunities-column p.name {
+            color: #800000;
+            font-weight: normal;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+#content .column {
+    float: left;
+    width: 440px;
+}
+
+    #content .column.right {
+        float: right;
+    }
+
+    #content .column h2 {
+        background: url("/static/images/wide_banner_bg.png") top left no-repeat;
+        color: #FFF;
+        height: 50px;
+        text-align: center;
+        padding-top: 8px;
+        font-family: "Podkova";
+        text-shadow: 0 2px 0 rgba(0, 0, 0, 0.5);
+    }

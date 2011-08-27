@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from datetime import datetime
 import json
+import hashlib
 
 class DictField(models.TextField):
     """ Serializes JSON on save and load. """
@@ -61,6 +62,16 @@ class Profile(models.Model):
     def get_default_data(self):
         """ Returns a default dictionary of data. Overwrite in subclasses. """
         return {}
+
+    def get_image(self, **kwargs):
+        """ Retrieves a Gravatar by default -- should be overwritten
+        on each subclass profile. May not be the best place for this...?
+        """
+        base = "//www.gravatar.com/avatar/"
+        email_hash = hashlib.md5(self.email.strip().lower()).hexdigest()
+        if "size" in kwargs:
+            email_hash += "?s=%d" % kwargs["size"]
+        return base + email_hash
 
     @classmethod
     def populate_from_request(self, request):
