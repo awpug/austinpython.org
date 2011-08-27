@@ -48,6 +48,7 @@ class Profile(models.Model):
 
     class Meta:
         ordering = ["-is_default", "-added_date"]
+        unique_together = ('user', 'type')
 
     def __init__(self, *args, **kwargs):
         """ Sets type automatically """
