@@ -3,6 +3,11 @@ group {
         ensure => present;
 }
 
+Package {
+    # bug in puppet? Why am I having to force this?
+    require => Exec["update_packages"]
+}
+
 package {
     "python-dev":
         ensure => present;
@@ -24,16 +29,18 @@ file {
 
     "apache2-default":
         path => "/etc/apache2/sites-available/default",
-        content => "Alias /static/ /vagrant/austinpython/static/
-
-        <Directory /vagrant/austinpython/static>
+        require => Package["apache2"],
+        notify => Service["apache2"],
+        content => "Alias /static/ /home/austinpython/live/austinpython/ap/static/
+        # hack, doesn't include other app static files
+        <Directory /home/austinpython/live/austinpython/ap/static>
         Order deny,allow
         Allow from all
         </Directory>
 
-        WSGIScriptAlias / /vagrant/austinpython/wsgi.py
+        WSGIScriptAlias / /home/austinpython/live/austinpython/wsgi.py
 
-        <Directory /vagrant/austinpython>
+        <Directory /home/austinpython>
         Order deny,allow
         Allow from all
         </Directory>";
@@ -41,8 +48,8 @@ file {
 
 service {
     "apache2":
-        ensure => running,
-        subscribe => File["apache2-default"];
+        hasrestart => true,
+        ensure => running;
 }
 
 
@@ -50,7 +57,10 @@ exec {
 
     "install_modules":
         path => ["/bin", "/usr/local/bin", "/usr/bin"],
-        command => "pip install -r /vagrant/requirements.txt",
+        command => "pip install -r /home/austinpython/live/requirements.txt",
         require => Package["python-pip", "git-core", "python-dev"];
 
+    "update_packages":
+        path => ["/bin", "/usr/local/bin", "/usr/bin"],
+        command => "apt-get update";
 }
