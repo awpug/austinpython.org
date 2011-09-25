@@ -5,10 +5,13 @@ import urllib
 import urlparse
 from austinpython import settings
 
-def get_twitter_consumer():
+def get_twitter_consumer(key=None, secret=None):
     """ Create the redirect url. """
-    consumer = oauth2.Consumer(settings.TWITTER_CONSUMER_KEY,
-        settings.TWITTER_CONSUMER_SECRET)
+    if not key:
+        key = settings.TWITTER_CONSUMER_KEY
+    if not secret:
+        secret = settings.TWITTER_CONSUMER_SECRET
+    consumer = oauth2.Consumer(key, secret)
     return consumer
 
 def get_twitter_request_token(consumer=None):
@@ -20,7 +23,8 @@ def get_twitter_request_token(consumer=None):
     params = {"oauth_callback": settings.TWITTER_CALLBACK_URL}
     body = urllib.urlencode(params)
     request, content = client.request(request_token_url, "GET", body=body)
-    assert(request.status == 200)
+    if request.status != 200:
+        raise Exception("Invalid Twitter token request: %s" % content)
     response_args = urlparse.parse_qs(content)
     assert(response_args["oauth_callback_confirmed"])
     token = oauth2.Token(key=response_args["oauth_token"][0],

@@ -40,8 +40,8 @@ class Profile(models.Model):
     """
     type = models.CharField(max_length=128)
     name = models.CharField(max_length=200) # user's full name
-    email = models.EmailField(max_length=200)
-    url = models.TextField(blank=True)
+    email = models.EmailField(max_length=200, blank=True)
+    username = models.CharField(max_length=128, blank=True)
     is_default = models.BooleanField(default=False)
     user = models.ForeignKey(User)
     added_date = models.DateTimeField(default=datetime.now, editable=False)

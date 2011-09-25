@@ -6,7 +6,9 @@ from django.forms import ValidationError
 from austinpython.tests import Mock
 from austinpython.registration.forms import RegistrationForm
 from austinpython.registration.models import AustinPython
+from austinpython.registration.models import GitHub
 from austinpython.registration import twitter
+from austinpython.registration import github
 from austinpython import settings
 import urlparse
 import httplib2
@@ -61,6 +63,29 @@ class TestAustinPythonProfile(TestCase):
         self.assertEqual(profile.name, "testing")
 
 
+class TestGitHubProfile(TestCase):
+
+    def test_new_github_profile_from_request(self):
+        """ Test that a new profile is saved with info from a request. """
+        request = Mock(POST={"name": "testing", "email": "foo@bar.com",
+            "login": "foobar"})
+        profile = GitHub.populate_from_request(request)
+        self.assertEqual(profile.name, "testing")
+        self.assertEqual(profile.username, "foobar")
+
+    def test_new_github_profile_from_api_request(self):
+        """ Test that a new profile is saved with info from the API. """
+        profile = GitHub.populate_from_user_profile({
+            "user" : {
+                "name": "testing",
+                "email": "foo@bar.com",
+                "login": "foobar"
+            }
+        })
+        self.assertEqual(profile.name, "testing")
+        self.assertEqual(profile.username, "foobar")
+
+
 class TestRegistrationController(TestCase):
 
     def test_get_new_user_profile(self):
@@ -92,7 +117,6 @@ class TestRegistrationController(TestCase):
             "/register/austinpython/submit", data)
         self.assertEqual(User.objects.count(), 0)
         self.assertEqual(AustinPython.objects.count(), 0)
-
 
 
 """ TWITTER """
@@ -141,7 +165,7 @@ class TestTwitterActualCalls(TestCase):
     """ If the settings allow it, test calls to the Twitter API. """
 
     @skipUnless(settings.TWITTER_TEST_REQUEST_TOKEN,
-        "Twitter request token test not requested.")
+        "Twitter request token test not enabled.")
     def test_get_request_token(self):
         """ Test that we get a valid request token. """
         token = twitter.get_twitter_request_token()
@@ -153,3 +177,99 @@ class TestTwitterActualCalls(TestCase):
         self.assertEqual(token.callback, args["oauth_callback"][0])
         response, content = httplib2.Http().request(redirect_url)
         self.assertEqual(response.status, 200)
+
+    @skipUnless(settings.TWITTER_TEST_REQUEST_TOKEN,
+        "Twitter request token test not enabled -- skipping error test.")
+    def test_get_invalid_request_token(self):
+        """ Test that invalid credentials fails to get token """
+        consumer = twitter.get_twitter_consumer("NO", "NO")
+        self.assertRaises(Exception, twitter.get_twitter_request_token,
+            consumer)
+
+    @skipUnless(settings.TWITTER_TEST_REQUEST_TOKEN,
+        "Twitter request token not enabled -- skipping redirect test.")
+    def test_get_twitter_registration_redirect(self):
+        """ Test that the /register/twitter page redirects to Twitter """
+        client = Client()
+        response = client.get("/register/twitter")
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(response.has_header("Location"))
+        location = response.get("Location", "")
+        self.assertTrue(location.startswith(
+            "https://twitter.com/oauth/authorize"))
+
+
+class TestGithubActualCalls(TestCase):
+    """ If the settings allow it, test calls to the GitHub API. """
+
+    @skipUnless(settings.GITHUB_TEST_REDIRECT_URL,
+        "GitHub request url test not enabled.")
+    def test_get_github_redirect_url(self):
+        """ Test that we get a valid GitHub request token. """
+        redirect_url = github.get_github_redirect_url()
+        args = urlparse.parse_qs(urlparse.urlparse(redirect_url).query)
+        self.assertEqual(settings.GITHUB_CALLBACK_URL,
+            args["redirect_uri"][0])
+        # GitHub SSL is failing... should fix this danger eventually
+        response, content = httplib2.Http(
+            disable_ssl_certificate_validation=True
+        ).request(redirect_url)
+        self.assertEqual(response.status, 200)
+
+    @skipUnless(settings.GITHUB_TEST_REDIRECT_URL,
+        "Github request url test not enabled.")
+    def test_get_github_registration_redirect(self):
+        """ Test that the /register/github page redirects to Github """
+        client = Client()
+        response = client.get("/register/github")
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(response.has_header("Location"))
+        location = response.get("Location", "")
+        self.assertTrue(location.startswith(
+            "https://github.com/login/oauth/authorize"
+        ))
+
+    @skipUnless(settings.GITHUB_TEST_REDIRECT_URL,
+        "Github request url test not enabled")
+    def test_get_github_access_token_with_invalid_code(self):
+        """ Test that the get_github_access_token fails with invalid code """
+        self.assertRaises(Exception, github.get_github_access_token,
+            code="FOOBAR")
+
+    @skipUnless(settings.GITHUB_TEST_REDIRECT_URL,
+        "Github request url test not enabled")
+    def test_get_github_user_profile_with_invalid_token(self):
+        """ Test that the get_github_user_profile fails with invalid token """
+        self.assertRaises(Exception, github.get_github_user_profile,
+            token="FOOBAR")
+
+class TestGitHubRegistrationWorkflow(TestCase):
+
+    def test_get_github_registration_callback(self):
+        """ Test that the /register/github/callback page processes tokens """
+        CODE = "FOOBAR"
+        # Monkey patching the token request function
+        original_token_func = github.get_github_access_token
+        original_user_func = github.get_github_user_profile
+        github.get_github_access_token = lambda code: "BAZ"
+        github.get_github_user_profile = lambda token: {
+            "user": {
+                "name": "Foo bar",
+                "email": "foo@bar.com",
+                "login": "foobar"
+            }
+        }
+        try:
+            client = Client()
+            response = client.get("/register/github/callback?code="+CODE)
+            self.assertEqual(response.status_code, 302)
+            self.assertTrue(response.has_header("Location"))
+            profile = GitHub.objects.get(username="foobar")
+            user = profile.user
+            self.assertEqual(profile.name, "Foo bar")
+            self.assertEqual(user.email, "foo@bar.com")
+            self.assertEqual(response["vary"], "Cookie")
+        finally:
+            github.get_github_access_token = original_token_func
+            github.get_github_user_profile = original_user_func
+

@@ -18,10 +18,10 @@ DATABASES = {
     'default': {
         # Add 'postgresql_psycopg2', 'postgresql', 'mysql',
         # 'sqlite3' or 'oracle'.
-        'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
         # Or path to database file if using sqlite3.
-        'NAME': map_path('../austinpython.db'),
-        'USER': '',                      # Not used with sqlite3.
+        'NAME': 'austinpython',
+        'USER': 'austinpython',                # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost.
         'PORT': '',                      # Set to empty string for default.
@@ -160,10 +160,20 @@ LOGGING = {
 }
 
 # Registration settings
+# =====================
+
+# Twitter settings
 TWITTER_CONSUMER_KEY = "SET_IN_LOCAL_SETTINGS"
 TWITTER_CONSUMER_SECRET = "SET_IN_LOCAL_SETTINGS"
-TWITTER_CALLBACK_URL = "http://localhost:8080/register/twitter/callback"
+TWITTER_CALLBACK_URL = "http://127.0.0.1:8080/register/twitter/callback"
 TWITTER_TEST_REQUEST_TOKEN = False
+
+# Github settings
+GITHUB_CONSUMER_KEY = "SET_IN_LOCAL_SETTINGS"
+GITHUB_CONSUMER_SECRET = "SET_IN_LOCAL_SETTINGS"
+GITHUB_CALLBACK_URL = "http://127.0.0.1:8080/register/github/callback"
+GITHUB_TEST_REDIRECT_URL = False
+
 
 try:
     from local_settings import *
