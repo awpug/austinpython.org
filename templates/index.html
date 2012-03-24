@@ -1,7 +1,7 @@
 {% extends "theme_base.html" %}
 
 {% block extra_style %}
-<link href="{{ STATIC_URL }}css/base.css" %}" rel="stylesheet" />
+<link href="{{ STATIC_URL }}css/base.css" rel="stylesheet" />
 {% endblock %}
 
 {% comment %}Turn off top par until acct_login is created{% endcomment %}
@@ -16,16 +16,24 @@
         We should really spend a little bit of time here talking about how
         awesome the Austin Python community is.
     </p>
-    <ul class="hero-buttons">
-        {% comment %}{% for button in hero_buttons %}{% endcomment %}
-        <li>
-        <a  href="{% comment %}{% button.link %}{% endcomment %}"
-            class="btn btn-primary btn-large {% comment %}{% button.class %}{% endcomment %}">
-            {% comment %}{% button.label %}{% endcomment %}
-        </a>
-        </li>
-        {% comment %}{% endfor %}{% endcomment %}
-    </ul>
+    <div style="float:right;">
+        <div class="btn-group">
+            <a class="btn btn-primary btn-large">RSVP</a>
+            <a class="btn btn-primary btn-large dropdown-toggle"><span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="#">RSVP on Meetup</a></li>
+                <li><a href="#">RSVP on Facebook</a></li>
+            </ul>
+        </div>
+    </div>
 </div>
 
+{% endblock %}
+
+{% block extra_script %}
+<script>
+jQuery(function() {
+    jQuery(".dropdown-toggle").dropdown();
+})
+</script>
 {% endblock %}
