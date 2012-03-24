@@ -1,4 +1,0 @@
-django
-oauth2
-south
-MySQL-python
