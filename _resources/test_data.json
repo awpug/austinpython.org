@@ -1,0 +1,32 @@
+[
+  {
+    "pk": 1, 
+    "model": "hero_content.hero", 
+    "fields": {
+      "body": "Longer body here", 
+      "summary": "Short summary here...", 
+      "default_action_text": "RSVP", 
+      "title": "April Fool's Talk!"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "hero_content.heroaction", 
+    "fields": {
+      "url": "#meetup", 
+      "is_default": true, 
+      "hero": 1, 
+      "title": "RSVP on Meetup"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "hero_content.heroaction", 
+    "fields": {
+      "url": "#facebook", 
+      "is_default": false, 
+      "hero": 1, 
+      "title": "RSVP on Facebook"
+    }
+  }
+]
