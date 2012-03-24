@@ -17,5 +17,8 @@ class HeroAction(models.Model):
     is_default = models.BooleanField()
     hero = models.ForeignKey(Hero, related_name="actions")
 
+    class Meta:
+        ordering = ["-is_default", ]
+
     def __unicode__(self):
         return "%s (%s)" % (self.title, self.url)
