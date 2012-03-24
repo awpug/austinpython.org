@@ -13,10 +13,24 @@
         awesome the Austin Python community is.
     </p>
 
-    <div style="float:right">
-        <a class="btn btn-primary btn-large">RSVP on Meetup</a>
-        <a class="btn btn-primary btn-large">RSVP on Facebook</a>
+    <div style="float:right;">
+        <div class="btn-group">
+            <a class="btn btn-primary btn-large">RSVP</a>
+            <a class="btn btn-primary btn-large dropdown-toggle"><span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="#">RSVP on Meetup</a></li>
+                <li><a href="#">RSVP on Facebook</a></li>
+            </ul>
+        </div>
     </div>
 </div>
 
+{% endblock %}
+
+{% block extra_script %}
+<script>
+jQuery(function() {
+    jQuery(".dropdown-toggle").dropdown();
+})
+</script>
 {% endblock %}
