@@ -5,7 +5,7 @@ class Hero(models.Model):
     title = models.CharField(max_length=200)
     summary = models.TextField()
     body = models.TextField()
-    default_action_text = models.CharField(max_length=200)
+    default_action_text = models.CharField(max_length=200, default="RSVP")
 
     def __unicode__(self):
         return self.title
