@@ -18,10 +18,10 @@ DATABASES = {
     'default': {
         # Add 'postgresql_psycopg2', 'postgresql', 'mysql',
         # 'sqlite3' or 'oracle'.
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.sqlite3',
         # Or path to database file if using sqlite3.
-        'NAME': 'austinpython',
-        'USER': 'austinpython',                # Not used with sqlite3.
+        'NAME': 'austinpython.db',
+        'USER': '',                # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost.
         'PORT': '',                      # Set to empty string for default.
