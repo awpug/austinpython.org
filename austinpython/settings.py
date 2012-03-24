@@ -1,5 +1,10 @@
 # Django settings for austinpython project.
 
+
+def project_dir(*paths):
+    import os
+    return os.path.join(os.path.dirname(__file__), "..", *paths)
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -106,9 +111,10 @@ ROOT_URLCONF = 'austinpython.urls'
 WSGI_APPLICATION = 'austinpython.wsgi.application'
 
 TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+    # Put strings here, like "/home/html/django_templates" or "C:/www/django/jjj".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    project_dir("templates"),
 )
 
 INSTALLED_APPS = (
