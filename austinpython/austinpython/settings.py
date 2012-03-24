@@ -112,6 +112,8 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = (
+    'pinax.templatetags',
+    'pinax_theme_bootstrap',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
