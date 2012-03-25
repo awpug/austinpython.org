@@ -5,28 +5,115 @@
 {% endblock %}
 
 {% comment %}Turn off top par until acct_login is created{% endcomment %}
-{% block topbar_base %}{% endblock %}
+{% block topbar_base %}
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <h1 id="header-logo">Austin Python</h1>
+        </div>
+    </div>
+</div>
+{% endblock %}
 
 {% block body %}
 
 <div class="hero-unit">
-    <h1>April Fool's Talk Python</h1>
+    <h1>{{ hero.title }}</h1>
+    <div class="hero-summary">
+        {{ hero.summary }}
+    </div>
+    {% if hero.actions %}
+    <ul class="hero-buttons">
+        {% comment %}Support multiple buttons some day?{% endcomment %}
+        <li>
+            <div class="btn-group">
+                <a  class="btn btn-primary btn-large"
+                    href="{{ hero.actions.0.url }}">
+                    {{ hero.default_action_text }}
+                </a>
+                {% if hero.actions.count > 1 %}
+                <a class="btn btn-primary btn-large dropdown-toggle">
+                    <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    {% for action in hero.actions.all %}
+                    <li><a href="{{ action.url }}">{{ action.title }}</a></li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+    </ul>
+    {% endif %}
+</div>
 
-    <p>
-        We should really spend a little bit of time here talking about how
-        awesome the Austin Python community is.
-    </p>
-    <div style="float:right;">
-        <div class="btn-group">
-            <a class="btn btn-primary btn-large">RSVP</a>
-            <a class="btn btn-primary btn-large dropdown-toggle"><span class="caret"></span></a>
-            <ul class="dropdown-menu">
-                <li><a href="#">RSVP on Meetup</a></li>
-                <li><a href="#">RSVP on Facebook</a></li>
-            </ul>
+<div class="gray-container textured-container">
+    <div class="gray-container-shadow">
+        <div class="container">
+            <div class="row">
+                <div class="span8">
+                    <h2>Signup for Announcements</h2>
+                    <p class="large">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Cras sit amet sapien nulla. In sodales, nisi sed volutpat
+                        porta, velit lectus pretium risus, nec placerat nisi ante ac
+                        orci. Suspendisse accumsan magna vitae diam mattis interdum.
+                        Fusce nec nibh turpis. 
+                    </p>
+                </div>
+                <div class="span4">
+                    <form class="well">
+                        <label for="email">Your Email</label>
+                        <input type="text" class="span3" name="email"/>
+                        <button type="submit" class="btn
+                            btn-primary btn-large">Signup for the Mailing List</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+<div class="post-container">
+    <div class="container">
+        <div class="row">
+
+            <div class="span4">
+                <div class="header-container">
+                    <div class="header-inner">
+                        <h2>Recent Posts</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="span4">
+                <div class="header-container">
+                    <div class="header-inner">
+                        <h2>Local Projects</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="span4">
+                <div class="header-container">
+                    <div class="header-inner">
+                        <h2>Tweets</h2>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <p class="large">Powered by Django and Heroku</p>
+            </div>
+        </div>
+    </div>
+</footer>
 
 {% endblock %}
 
