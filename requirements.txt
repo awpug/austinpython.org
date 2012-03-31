@@ -4,3 +4,4 @@ pinax-theme-bootstrap==2.0.2.post1
 feedparser==5.1.1
 icalendar==3.0.1b2
 pytz==2012b
+Markdown==2.1.1

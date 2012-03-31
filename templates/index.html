@@ -1,4 +1,5 @@
 {% extends "theme_base.html" %}
+{% load markup %}
 
 {% block extra_style %}
 <link href="{{ STATIC_URL }}css/base.css" rel="stylesheet" />
@@ -20,7 +21,7 @@
 <div class="hero-unit">
     <h1>{{ hero.title }}</h1>
     <div class="hero-summary">
-        {{ hero.summary }}
+        {{ hero.summary|markdown }}
     </div>
     {% if hero.actions %}
     <ul class="hero-buttons">
@@ -57,7 +58,7 @@
                         Cras sit amet sapien nulla. In sodales, nisi sed volutpat
                         porta, velit lectus pretium risus, nec placerat nisi ante ac
                         orci. Suspendisse accumsan magna vitae diam mattis interdum.
-                        Fusce nec nibh turpis. 
+                        Fusce nec nibh turpis.
                     </p>
                 </div>
                 <div class="span4">
