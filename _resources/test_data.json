@@ -3,30 +3,12 @@
     "pk": 1, 
     "model": "hero_content.hero", 
     "fields": {
-      "body": "Longer body here", 
-      "summary": "Short summary here...", 
-      "default_action_text": "RSVP", 
-      "title": "April Fool's Talk!"
-    }
-  }, 
-  {
-    "pk": 1, 
-    "model": "hero_content.heroaction", 
-    "fields": {
-      "url": "#meetup", 
-      "is_default": true, 
-      "hero": 1, 
-      "title": "RSVP on Meetup"
-    }
-  }, 
-  {
-    "pk": 2, 
-    "model": "hero_content.heroaction", 
-    "fields": {
-      "url": "#facebook", 
-      "is_default": false, 
-      "hero": 1, 
-      "title": "RSVP on Facebook"
+      "body": "Some body here", 
+      "title": "March Meetup Madness", 
+      "summary": "Come learn about Django Models and Google App Engine", 
+      "action_url": "http://www.meetup.com/austinwebpythonusergroup/events/57110872/", 
+      "action_text": "RSVP on Meetup", 
+      "source_id": "austinwebpythonusergroup/events/57110872/"
     }
   }
 ]

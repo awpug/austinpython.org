@@ -19,6 +19,58 @@
   <defs
      id="defs4">
     <linearGradient
+       id="linearGradient4700">
+      <stop
+         style="stop-color:#000000;stop-opacity:0.24615385;"
+         offset="0"
+         id="stop4702" />
+      <stop
+         style="stop-color:#000000;stop-opacity:0;"
+         offset="1"
+         id="stop4704" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient4651">
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="0"
+         id="stop4653" />
+      <stop
+         id="stop4659"
+         offset="0.69999999"
+         style="stop-color:#ffffff;stop-opacity:1;" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:0;"
+         offset="1"
+         id="stop4655" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient4621">
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="0"
+         id="stop4623" />
+      <stop
+         id="stop4629"
+         offset="0.60000002"
+         style="stop-color:#ffffff;stop-opacity:1;" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:0;"
+         offset="1"
+         id="stop4625" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient4611">
+      <stop
+         style="stop-color:#000000;stop-opacity:0.25384617;"
+         offset="0"
+         id="stop4613" />
+      <stop
+         style="stop-color:#000000;stop-opacity:0;"
+         offset="1"
+         id="stop4615" />
+    </linearGradient>
+    <linearGradient
        id="linearGradient4578">
       <stop
          id="stop4580"
@@ -372,7 +424,7 @@
        id="linearGradient4462"
        gradientUnits="userSpaceOnUse"
        gradientTransform="matrix(0.45493848,0,0,1,-1193.6906,0)"
-       x1="-4088.1233"
+       x1="-2734.2146"
        y1="-9089.5703"
        x2="-2190.0105"
        y2="-9089.5703" />
@@ -382,7 +434,7 @@
        id="linearGradient4464"
        gradientUnits="userSpaceOnUse"
        gradientTransform="matrix(0.45493848,0,0,1,4940.7325,0)"
-       x1="-4088.1233"
+       x1="-2811.9614"
        y1="-9089.5703"
        x2="-2190.0105"
        y2="-9089.5703" />
@@ -497,16 +549,6 @@
     </filter>
     <linearGradient
        inkscape:collect="always"
-       xlink:href="#linearGradient4475"
-       id="linearGradient4481"
-       x1="-2087.8881"
-       y1="735.61129"
-       x2="-789.52586"
-       y2="735.61129"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.90409316,0,0,0.90409316,-356.17502,-2079.0556)" />
-    <linearGradient
-       inkscape:collect="always"
        xlink:href="#linearGradient4475-0"
        id="linearGradient4481-5"
        x1="-2087.8882"
@@ -545,6 +587,46 @@
        y1="735.61127"
        x2="-789.52588"
        y2="735.61127" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4611"
+       id="linearGradient4617"
+       x1="-8748.5713"
+       y1="-1381.9235"
+       x2="-8274.2856"
+       y2="-1381.9235"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1,0,0,0.14492754,7129.5049,8711.7071)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4700-6"
+       id="linearGradient4706-6"
+       x1="-9813.6582"
+       y1="-3195.0669"
+       x2="-9813.6582"
+       y2="-2627.627"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       id="linearGradient4700-6">
+      <stop
+         style="stop-color:#efefef;stop-opacity:1;"
+         offset="0"
+         id="stop4702-0" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:0;"
+         offset="1"
+         id="stop4704-6" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4700-6"
+       id="linearGradient4799"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(0,-1.7382813e-5)"
+       x1="-9813.6582"
+       y1="-3195.0669"
+       x2="-9813.6582"
+       y2="-2627.627" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -553,9 +635,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.087500002"
-     inkscape:cx="-10236.442"
-     inkscape:cy="2380.9554"
+     inkscape:zoom="0.175"
+     inkscape:cx="-9282.3936"
+     inkscape:cy="2517.4645"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -586,7 +668,7 @@
        style="font-size:100.49792480000000694px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#fb8b00;fill-opacity:1;stroke:none;font-family:Sans"
        id="text3009" />
     <rect
-       y="1265.7317"
+       y="1437.1603"
        x="-7119.8438"
        height="4656.6045"
        width="8839.9375"
@@ -774,9 +856,9 @@
     <g
        transform="translate(-7280.1971,-3735.6503)"
        id="g6090"
-       inkscape:export-filename="/home/jmarshall/Projects/austinpython.org/_resources/austinpython_logo_140x101.png"
-       inkscape:export-xdpi="5.9000001"
-       inkscape:export-ydpi="5.9000001">
+       inkscape:export-filename="/home/jmarshall/Projects/austinpython.org/static/images/austinpython_logo_167x120.png"
+       inkscape:export-xdpi="7.0313888"
+       inkscape:export-ydpi="7.0313888">
       <path
          sodipodi:type="inkscape:offset"
          inkscape:radius="12.121831"
@@ -784,25 +866,25 @@
          style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:30;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
          id="path6092"
          d="m -3503.2188,-1349.625 c -2.6711,0 -5.2029,0.2786 -7.5937,0.6875 -68.6077,11.733 -191.8058,27.0714 -303.1563,50.875 -55.6683,11.9006 -108.4648,25.846 -151.2812,43.2813 -42.6116,17.3518 -78.1729,37.4238 -92.8125,71.1874 -0,0.01 0,0.023 0,0.031 -0.035,0.093 -1.4596,4.5522 -1.4687,4.5937 -0.01,0.042 -0.5929,4.7698 -0.5938,4.8126 a 12.123043,12.123043 0 0 0 0,0.031 c 0,0 -1.3413,69.0377 2.2188,148.9375 3.5547,79.78609 9.8935,168.59431 33.4687,220.1875 l 39.7187,86.9375 -26.7187,108.625 c -17.3878,30.87729 -11.5421,71.38844 0.031,117.9375 12.2385,49.22552 34.3577,106.74469 62.1562,165.0625 55.5766,116.59275 131.888,235.51213 204.9062,291.59375 132.998,102.148866 194.2895,126.36743 254.0313,130.4375 12.9513,0.882341 32.3257,14.97046 47.8125,33.375 7.8128,9.28471 14.7821,19.13065 20.5625,27.53125 4.6169,6.7096 7.9071,12.23507 12.7813,17.875 0.035,0.0411 0.058,0.0839 0.094,0.125 0.9231,1.48182 1.8237,2.97625 1.8437,3 0.041,0.0484 5.3221,4.74654 5.375,4.78125 0.053,0.0347 6.4394,2.98184 6.5,3 0.061,0.0182 7.0305,1.0624 7.0938,1.0625 a 12.123043,12.123043 0 0 0 0.031,0 c 0.7626,0 0.4598,-0.007 0.7188,-0.0312 0.1336,0.0121 -0.4112,-0.0159 0.2812,0 -1.0653,-0.0245 -0.4842,0.0189 0.5938,0.0312 0.1698,0.002 -0.1245,0 0.094,0 0.035,0 0.045,0 0.094,0 0.1131,0 0.2167,2e-5 0.2187,0 0.093,0 0.1181,1e-5 0.1876,0 0.1574,0 -0.013,0.002 0.125,0 0.931,-0.0126 0.9458,-0.0168 0.8437,-0.0312 0.2589,0.0237 -0.044,0.0312 0.7187,0.0312 a 12.123043,12.123043 0 0 0 0.063,0 c 0.063,-2.5e-4 7.0019,-1.04427 7.0624,-1.0625 0.061,-0.0182 6.4472,-2.99655 6.5,-3.03125 0.053,-0.0347 5.303,-4.7017 5.3438,-4.75 0.02,-0.0237 0.9231,-1.52099 1.8438,-3 0.036,-0.0411 0.058,-0.0839 0.094,-0.125 4.8634,-5.62263 8.178,-11.13988 12.8125,-17.875 5.7804,-8.4006 12.7497,-18.2465 20.5625,-27.53125 15.487,-18.40461 34.8612,-32.492659 47.8125,-33.375 59.7418,-4.07007 121.0335,-28.288633 254.0312,-130.4375 73.0184,-56.081621 149.3297,-175.00101 204.9063,-291.59375 27.7985,-58.31784 49.9174,-115.83711 62.1563,-165.0625 11.5731,-46.54905 17.419,-87.06021 0.031,-117.9375 l -26.7188,-108.625 39.7188,-86.9375 c 23.575,-51.59317 29.9138,-140.40143 33.4688,-220.1875 1.7799,-39.9499 2.3248,-77.1404 2.4374,-104.375 0.056,-13.6173 0.01,-24.7371 -0.062,-32.4687 -0.035,-3.8659 -0.095,-6.8822 -0.125,-8.9376 -0.03,-2.0553 -0.031,-3.1562 -0.031,-3.1562 l -12.125,0.2188 12.125,-0.25 c -9e-4,-0.043 -0.5846,-4.7708 -0.5937,-4.8126 -0.01,-0.041 -1.4342,-4.5002 -1.4688,-4.5937 -0,-0.01 0,-0.023 0,-0.031 -14.6397,-33.7636 -50.201,-53.8356 -92.8125,-71.1874 -42.8163,-17.4353 -95.6129,-31.3807 -151.2813,-43.2813 -111.3503,-23.8036 -234.5485,-39.142 -303.1562,-50.875 -0.04,-0.01 -4.553,-0.3757 -4.5938,-0.375 -0.041,7e-4 -4.5538,0.523 -4.5937,0.5313 -0.04,0.01 -4.3998,1.3282 -4.4375,1.3437 -0.038,0.015 -4.0596,2.1341 -4.0938,2.1563 l 0,-0.031 c -43.3678,28.0358 -75.3987,41.8192 -104.8437,42.625 -29.5249,0.808 -60.4631,-10.5704 -104.3437,-42.25 -0.055,-0.04 -6.8412,-3.479 -6.9063,-3.5 -0.065,-0.021 -7.5879,-1.1875 -7.6563,-1.1875 z"
-         inkscape:export-filename="/home/jmarshall/Projects/AustinPythonOriginalStuff/graphics/austinpython_logo_small.png"
-         inkscape:export-xdpi="1.52"
-         inkscape:export-ydpi="1.52" />
+         inkscape:export-filename="/home/jmarshall/Projects/austinpython.org/static/images/austinpython_logo_167x120.png"
+         inkscape:export-xdpi="7.04"
+         inkscape:export-ydpi="7.04" />
       <path
          style="color:#000000;fill:url(#linearGradient4576);fill-opacity:1.0;fill-rule:nonzero;stroke:none;stroke-width:30;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
          d="m -3503.2295,-1324.7057 c -1.0305,0 -2.1614,0.1028 -3.3872,0.3124 -139.8207,23.9117 -489.7027,60.9543 -528.6009,150.75 0,0 -5.2981,273.57294 33.423,358.31252 l 43.3284,94.8125 -29.5566,120.25 c -50.1497,75.18061 127.1819,444.58258 258.8206,545.687504 131.6385,101.10491 186.0393,121.62834 240.5752,125.34375 50.8192,3.4622 89.6314,79.159156 100.2051,89.468746 0.068,0.41735 0.1242,0.80073 0.1917,1.21875 0.2365,0 0.5456,-0.11043 0.8627,-0.3125 0.3153,0.2003 0.5955,0.3125 0.8309,0.3125 0.041,-0.40339 0.087,-0.72213 0.1278,-1.125 0.037,-0.0358 0.09,-0.0876 0.1278,-0.125 0.038,0.0374 0.09,0.0892 0.1278,0.125 0.041,0.40287 0.087,0.72161 0.1278,1.125 0.2353,0 0.5155,-0.1122 0.8307,-0.3125 0.3172,0.20207 0.6263,0.3125 0.8628,0.3125 0.068,-0.41802 0.1239,-0.8014 0.1917,-1.21875 10.5737,-10.30959 49.3859,-86.006546 100.2051,-89.468746 54.5359,-3.71541 108.9367,-24.23884 240.5753,-125.34375 131.6386,-101.104924 308.9702,-470.506894 258.8206,-545.687504 l -29.5567,-120.25 43.3284,-94.8125 c 38.7211,-84.73958 33.423,-358.31252 33.423,-358.31252 -38.8982,-89.7957 -388.7802,-126.8383 -528.601,-150.75 -89.7642,58.0294 -144.9532,66.3456 -237.284,-0.3124 z"
          id="path6094"
          inkscape:connector-curvature="0"
          sodipodi:nodetypes="ccccccsscccccccccccsscccccc"
-         inkscape:export-filename="/home/jmarshall/Projects/AustinPythonOriginalStuff/graphics/austinpython_logo_small.png"
-         inkscape:export-xdpi="1.52"
-         inkscape:export-ydpi="1.52" />
+         inkscape:export-filename="/home/jmarshall/Projects/austinpython.org/static/images/austinpython_logo_167x120.png"
+         inkscape:export-xdpi="7.04"
+         inkscape:export-ydpi="7.04" />
       <g
          id="g6096"
          transform="translate(0,4)"
          style="fill:#ffffff;fill-opacity:0.50431064"
-         inkscape:export-filename="/home/jmarshall/Projects/AustinPythonOriginalStuff/graphics/austinpython_logo_small.png"
-         inkscape:export-xdpi="1.52"
-         inkscape:export-ydpi="1.52">
+         inkscape:export-filename="/home/jmarshall/Projects/austinpython.org/static/images/austinpython_logo_167x120.png"
+         inkscape:export-xdpi="7.04"
+         inkscape:export-ydpi="7.04">
         <path
            style="color:#000000;fill:#000000;fill-opacity:0.50431064;fill-rule:nonzero;stroke:none;stroke-width:30;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
            d="m -3764.506,-415.34199 c -15.5226,118.63469 17.1135,179.51543 58.1503,222.53513 -7.0573,-126.93652 9.5322,-229.32331 83.1148,-238.11431 73.5825,-8.791 54.5143,79.46592 54.5143,122.02847 l 0,129.27878 c 59.0576,199.173133 319.4548,183.061743 358.5513,-17.90005 l 0,-157.74044 c 4.0421,-42.30731 20.8359,-77.27668 53.3408,-80.81319 32.5049,-3.53649 53.4289,42.699 53.4289,58.82811 l -13.3472,23.73349 c -31.9794,47.7222 -0.7727,86.11319 16.4878,135.71021 13.5364,7.82035 49.9799,8.89389 61.7717,0.48685 16.7864,-41.4223 69.9834,-93.81218 34.5986,-146.71203 -3.9253,-5.86823 -8.2513,-12.06898 -14.0543,-18.08693 l 6e-4,-60.44527 c 0,-130.21975 -312.6218,-129.22414 -312.6218,27.64367 l 0,168.85474 c 3.349,111.52481 -120.0219,99.21627 -117.7616,7.7456 1.888,-78.38938 18.9637,-293.90682 -97.0241,-292.51769 -81.3666,0 -74.0093,-0.41875 -134.5384,11.96219 -60.5291,12.38096 -84.6117,64.73536 -84.6117,103.52267 z"
@@ -818,7 +900,10 @@
       </g>
       <g
          id="g6102"
-         transform="translate(-1753.6248,-92.156669)">
+         transform="translate(-1753.6248,-92.156669)"
+         inkscape:export-filename="/home/jmarshall/Projects/austinpython.org/static/images/austinpython_logo_167x120.png"
+         inkscape:export-xdpi="7.04"
+         inkscape:export-ydpi="7.04">
         <path
            inkscape:connector-curvature="0"
            style="color:#000000;fill:#000000;fill-opacity:0.42241378;fill-rule:nonzero;stroke:none;stroke-width:30;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
@@ -1024,9 +1109,30 @@
          style="color:#000000;fill:url(#linearGradient4025);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:30;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
          transform="scale(-1,1)" />
     </g>
+    <rect
+       style="color:#000000;fill:#ffffff;fill-opacity:0;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect4605"
+       width="905.09668"
+       height="443.86395"
+       x="-5386.1328"
+       y="-159.82085"
+       inkscape:export-filename="/home/jmarshall/Projects/austinpython.org/static/images/header_background_right.png"
+       inkscape:export-xdpi="8.1105947"
+       inkscape:export-ydpi="8.1105947" />
+    <rect
+       y="-159.82085"
+       x="5591.8472"
+       height="443.86395"
+       width="54.903286"
+       id="rect4607"
+       style="color:#000000;fill:#ffffff;fill-opacity:0;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       transform="scale(-1,1)"
+       inkscape:export-filename="/home/jmarshall/Projects/austinpython.org/static/images/header_background.png"
+       inkscape:export-xdpi="8.1105947"
+       inkscape:export-ydpi="8.1105947" />
     <g
        id="g3986-1"
-       transform="translate(-4386.8842,985.7837)"
+       transform="translate(-6249.7413,3980.0693)"
        style="opacity:0.98999999"
        inkscape:export-filename="/home/jmarshall/Projects/AustinPython/site/static/images/wide_banner_bg.png"
        inkscape:export-xdpi="9.4899998"
@@ -1672,6 +1778,34 @@
            inkscape:export-xdpi="2.0739422"
            inkscape:export-ydpi="2.0739422" />
       </g>
+    </g>
+    <rect
+       style="color:#000000;fill:url(#linearGradient4617);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect4609"
+       width="474.28571"
+       height="114.28571"
+       x="-1619.0664"
+       y="8454.2852"
+       transform="matrix(0,1,-1,0,0,0)"
+       inkscape:export-filename="/home/jmarshall/Projects/austinpython.org/static/images/gray_container_shadow.png"
+       inkscape:export-xdpi="1.14"
+       inkscape:export-ydpi="1.14" />
+    <g
+       id="g4795"
+       transform="matrix(0.15714288,0,0,2,-8157.3872,4193.352)"
+       inkscape:export-filename="/home/jmarshall/Projects/austinpython.org/static/images/container_shadow.png"
+       inkscape:export-xdpi="0.73000002"
+       inkscape:export-ydpi="0.73000002">
+      <rect
+         y="-3227.6377"
+         x="-10125.714"
+         height="628.57141"
+         width="800"
+         id="rect4690"
+         style="color:#000000;fill:url(#linearGradient4799);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         inkscape:export-filename="/home/jmarshall/Projects/austinpython.org/static/images/container_shadow.png"
+         inkscape:export-xdpi="2.8599999"
+         inkscape:export-ydpi="2.8599999" />
     </g>
   </g>
 </svg>

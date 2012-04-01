@@ -1,5 +1,38 @@
 # Django settings for austinpython project.
 
+import os
+import urlparse
+import logging
+
+SERVE_COMPILED_CSS = os.environ.get(
+    "SERVE_COMPILED_CSS", "false").lower() == "true"
+
+if "DATABASES" not in locals():
+    DATABASES = {}
+
+if "DATABASE_URL" not in os.environ:
+    os.environ["DATABASE_URL"] = "sqlite3://localhost/austinpython.db"
+
+
+DATABASE_URI = urlparse.urlparse(os.environ["DATABASE_URL"])
+DATABASES["default"] = {
+    "NAME": DATABASE_URI.path[1:],
+    "USER": DATABASE_URI.username or "",
+    "PASSWORD": DATABASE_URI.password or "",
+    "HOST": DATABASE_URI.hostname,
+    "PORT": DATABASE_URI.port or ""
+}
+if DATABASE_URI.scheme == "postgres":
+    DATABASES["default"]["ENGINE"] = "django.db.backends.postgresql_psycopg2"
+elif DATABASE_URI.scheme == "mysql":
+    DATABASES["default"]["ENGINE"] = "django.db.backends.mysql"
+elif DATABASE_URI.scheme == "sqlite3":
+    DATABASES["default"]["ENGINE"] = "django.db.backends.sqlite3"
+else:
+    logging.error("Unknown database scheme: %s" % DATABASE_URI.scheme)
+    raise Exception("Can't setup database type %s" % DATABASE_URI.scheme)
+
+
 def project_dir(*paths):
     import os
     return os.path.join(os.path.dirname(__file__), "..", *paths)
@@ -12,18 +45,6 @@ ADMINS = (
 )
 
 MANAGERS = ADMINS
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': './austinpython.db',                      # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
-    }
-}
-
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -124,14 +145,16 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
+    'django.contrib.markup',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
+    'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-
     "hero_content",
+    "posts",
+    "gunicorn",
 )
 
 # A sample logging configuration. The only tangible logging

@@ -1,8 +1,12 @@
 {% extends "site_base.html" %}
 
+{% load staticfiles %}
+{% load markup %}
+
 {% block extra_style %}
-<link href="{{ STATIC_URL }}css/base.css" rel="stylesheet" />
-<link href="{{ STATIC_URL }}css/fonts.css" rel="stylesheet" />
+<link href="http://fonts.googleapis.com/css?family=PT+Sans|Podkova" rel="stylesheet"/>
+<link href="{% static "less/base.less" %}" rel="stylesheet/less" />
+<!--<link href="{% static "less/fonts.less" %} " rel="stylesheet/less" />-->
 {% endblock %}
 
 {% comment %}Turn off top par until acct_login is created{% endcomment %}
@@ -17,66 +21,30 @@
 {% endblock %}
 
 {% block body %}
-<div class="hero-container first-container">
-    <div class="container">
-        <div class="hero-unit">
-            <h1>{{ hero.title }}</h1>
-            <div class="hero-contents row">
-                <div class="hero-summary span6">
-                    <!--{{ hero.summary }}-->
-                    This will be an awesome speeching by the great Ben Weatherman
-                    and Travis Swicegood, alternating every other word.
-                </div>
-                <div class="hero-details span6">
-                    {% if hero.actions %}
-                    <ul class="hero-buttons">
-                        {% comment %}Support multiple buttons some day?{% endcomment %}
-                        <li>
-                            <div class="btn-group">
-                                <a  class="btn btn-primary btn-large"
-                                    href="{{ hero.actions.0.url }}">
-                                    {{ hero.default_action_text }}
-                                </a>
-                                {% if hero.actions.count > 1 %}
-                                <a class="btn btn-primary btn-large dropdown-toggle">
-                                    <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    {% for action in hero.actions.all %}
-                                    <li><a href="{{ action.url }}">{{ action.title }}</a></li>
-                                    {% endfor %}
-                                </ul>
-                                {% endif %}
-                            </div>
-                        </li>
-                    </ul>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+{% include "hero.html" %}
 
 <div class="gray-container textured-container">
     <div class="gray-container-shadow">
         <div class="container">
             <div class="row">
+                <div class="span4">
+                    <form class="well"
+                        action="http://groups.google.com/forum/#!forum/austin-python">
+                        <label for="email">Your Email</label>
+                        <input type="text" class="span3" name="email"/>
+                        <button type="submit" class="btn btn-success
+                            btn-primary btn-large">Signup for the Mailing List</button>
+                    </form>
+                </div>
                 <div class="span8">
                     <h2>Signup for Announcements</h2>
                     <p class="large">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Cras sit amet sapien nulla. In sodales, nisi sed volutpat
-                        porta, velit lectus pretium risus, nec placerat nisi ante ac
-                        orci. Suspendisse accumsan magna vitae diam mattis interdum.
-                        Fusce nec nibh turpis. 
+                        Things move quickly in Austin, and if you're a Python
+                        developer (or interested in becoming one!) you need
+                        to be plugged in to the community. Sign up on the
+                        left and we'll make sure you are informed about all
+                        the important events around town!
                     </p>
-                </div>
-                <div class="span4">
-                    <form class="well">
-                        <label for="email">Your Email</label>
-                        <input type="text" class="span3" name="email"/>
-                        <button type="submit" class="btn
-                            btn-primary btn-large">Signup for the Mailing List</button>
-                    </form>
                 </div>
             </div>
         </div>
@@ -87,31 +55,48 @@
     <div class="container">
         <div class="row">
 
-            <div class="span4">
+            <div class="span7">
                 <div class="header-container">
                     <div class="header-inner">
                         <h2>Recent Posts</h2>
                     </div>
                 </div>
+
+                {% if posts %}
+                <ul class="post-list">
+                    {% for post in posts %}
+                    <li>
+                        <img class="post-author"
+                            src="{{ post.author_avatar_url }}"/>
+                        <h3>{{ post.title }}</h3>
+                        <div class="post-info">
+                            Published on {{ post.pub_date.date_string }} at 
+                            {{ post.pub_date.time_string }} by 
+                            {{ post.author.name }}
+                        </div>
+                        <!-- will use summary when we have full post pages -->
+                        <div class="post-content">
+                            {{ post.content|markdown }}
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
             </div>
 
-            <div class="span4">
-                <div class="header-container">
-                    <div class="header-inner">
-                        <h2>Local Projects</h2>
-                    </div>
-                </div>
-            </div>
-
-            <div class="span4">
+            <div class="span5 hidden-phone">
                 <div class="header-container">
                     <div class="header-inner">
                         <h2>Tweets</h2>
                     </div>
                 </div>
+                <ul class="post-list" id="tweets"></ul>
             </div>
 
         </div>
+    </div>
+
+    <div class="body-footer">
     </div>
 </div>
 
@@ -128,9 +113,15 @@
 {% endblock %}
 
 {% block extra_script %}
+<script type="text/javascript" src="/static/js/twitter_search.js"></script>
 <script>
 jQuery(function() {
     jQuery(".dropdown-toggle").dropdown();
+    var twitter = new twitterSearch.TwitterSearch({
+        query: "awpug",
+        container: "#tweets"
+    });
+    twitter.init();
 })
 </script>
 {% endblock %}

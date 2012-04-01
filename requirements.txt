@@ -1,3 +1,14 @@
 Django==1.4
+Markdown==2.1.1
 Pinax==0.9a2
-pinax-theme-bootstrap==2.0.2.post1
+South==0.7.3
+django-appconf==0.5
+django-staticfiles==1.1.2
+feedparser==5.1.1
+httplib2==0.7.1
+icalendar==3.0.1b2
+oauth2==1.5.170
+-e git://github.com/joshmarshall/pinax-theme-bootstrap.git@5eed0fc721826325fcacea40e1830cb1b17d8189#egg=pinax_theme_bootstrap-dev
+psycopg2==2.4.5
+pytz==2012b
+wsgiref==0.1.2

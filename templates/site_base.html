@@ -1,0 +1,21 @@
+{% extends "theme_base.html" %}
+{% load staticfiles %}
+
+{% block style_base %}
+    <link href="{% static "pinax/css/theme.css" %}" rel="stylesheet"/>
+    <link href="{% static "css/master.css" %}" rel="stylesheet"/>
+    {% block extra_style %}
+    {% endblock %}
+{% endblock %}
+
+{% block body_class %}no-mobile-padding{% endblock %}
+
+{% block body_base %}
+
+<div class="container-fluid body-container">
+  {% include "_messages.html" %}
+  {% block body %}
+  {% endblock body %}
+</div>
+
+{% endblock %}

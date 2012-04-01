@@ -1,0 +1,35 @@
+{% load markup %}
+
+<div class="hero-container first-container">
+    <div class="container">
+        <div class="hero-unit">
+            <h1>{{ hero.title }}</h1>
+            <div class="hero-contents row">
+                <div class="hero-summary span7">
+                    {{ hero.summary|markdown }}
+                </div>
+                <div class="hero-details span5">
+                    <dl class="well">
+                        <dt>Date</dt>
+                        <dd>{{ hero.datetime.date }}</dd>
+                        <dt>Time</dt>
+                        <dd>{{ hero.datetime.time }}</dd>
+                        <dt>Location</dt>
+                        <dd>
+                            <a href="{{ hero.location_map_url }}">
+                              {{ hero.location }}
+                            </a>
+                        </dd>
+                    </dl>
+
+                    <div class="btn-group hero-button">
+                        <a  class="btn btn-success btn-primary btn-large"
+                            href="{{ hero.action_url }}">
+                            {{ hero.action_text }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

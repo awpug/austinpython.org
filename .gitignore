@@ -12,3 +12,4 @@ build/
 manifests/build
 manifests/src
 manifests/pip-log.txt
+static/fonts
