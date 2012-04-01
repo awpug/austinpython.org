@@ -3,6 +3,7 @@ from django.views.generic import DetailView
 
 from hero_content.models import Hero
 from posts.models import Post
+from django.conf import settings
 
 class IndexView(DetailView):
     model = Hero
@@ -26,6 +27,8 @@ class IndexView(DetailView):
     def get_context_data(self, *args, **kwargs):
         context = super(IndexView, self).get_context_data(*args, **kwargs)
         context["posts"] = Post.objects.order_by("-pub_date")[:5]
+        # This should be moved to a default template var at some point...
+        context["USE_COMPILED_STATIC"] = settings.USE_COMPILED_STATIC
         return context
 
 

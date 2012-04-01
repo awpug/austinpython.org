@@ -4,8 +4,10 @@ import os
 import urlparse
 import logging
 
-SERVE_COMPILED_CSS = os.environ.get(
-    "SERVE_COMPILED_CSS", "false").lower() == "true"
+SITE_NAME = "Austin Python"
+
+USE_COMPILED_STATIC = os.environ.get(
+    "USE_COMPILED_STATIC", "false").lower() == "true"
 
 if "DATABASES" not in locals():
     DATABASES = {}
