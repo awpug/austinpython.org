@@ -113,7 +113,7 @@
 {% endblock %}
 
 {% block extra_script %}
-<script type="text/javascript" src="/static/js/twitter_search.js"></script>
+<script type="text/javascript" src="{% static "js/twitter_search.js" %}"></script>
 <script>
 jQuery(function() {
     jQuery(".dropdown-toggle").dropdown();
