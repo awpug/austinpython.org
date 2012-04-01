@@ -11,9 +11,12 @@ def posts():
     return Post.objects.all()[:5]
 
 PostsMixin = context_mixin_factory(callback=posts)
+CompiledStaticMixin = context_mixin_factory({
+        "USE_COMPILED_STATIC": settings.USE_COMPILED_STATIC,
+})
 
 
-class IndexView(PostsMixin, DetailView):
+class IndexView(PostsMixin, CompiledStaticMixin, DetailView):
     model = Hero
     queryset = Hero.objects.all()
     template_name = "index.html"
@@ -31,12 +34,6 @@ class IndexView(PostsMixin, DetailView):
             return queryset.all()[0]
         except IndexError:
             return _fake_hero()
-
-    def get_context_data(self, *args, **kwargs):
-        context = super(IndexView, self).get_context_data(*args, **kwargs)
-        # This should be moved to a default template var at some point...
-        context["USE_COMPILED_STATIC"] = settings.USE_COMPILED_STATIC
-        return context
 
 
 def _fake_hero():
