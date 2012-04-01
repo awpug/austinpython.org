@@ -154,7 +154,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     "hero_content",
     "posts",
-    "gunicorn",
+    #"gunicorn",
 )
 
 # A sample logging configuration. The only tangible logging
