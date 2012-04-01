@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 
 import hashlib
 
-# Create your models here.
 
 class Post(models.Model):
     title = models.CharField(max_length=250)
@@ -13,6 +12,9 @@ class Post(models.Model):
     pub_date = models.DateTimeField(auto_now_add=True)
     content = models.TextField()
     author = models.ForeignKey(User)
+
+    class Meta:
+        ordering = ["-pub_date", ]
 
     @property
     def author_avatar_url(self):
@@ -35,6 +37,7 @@ class Post(models.Model):
 
     def __unicode__(self):
         return self.title
+
 
 class PostAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
