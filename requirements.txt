@@ -12,3 +12,4 @@ oauth2==1.5.170
 psycopg2==2.4.5
 pytz==2012b
 wsgiref==0.1.2
+gunicorn==0.14.2
