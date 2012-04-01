@@ -17,3 +17,7 @@ urlpatterns = patterns('',
 
     url(r'^$', include('atxpy_home.urls')),
 )
+
+# Do as I say, not as a do.
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+urlpatterns += staticfiles_urlpatterns()
